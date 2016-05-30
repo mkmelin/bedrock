@@ -5,7 +5,7 @@
 {% extends "thunderbird/base-resp.html" %}
 
 {% block page_title_prefix %}{{_('Thunderbird')}} — {% endblock %}
-{% block page_title %}{{ _('Thanks for downloading Thunderbird.') }}{% endblock %}
+{% block page_title %}{{ _('Downloading Thunderbird…') }}{% endblock %}
 ###{% block page_desc %}{{ _('') }}{% endblock %}
 
 {% block body_id %}thunderbird-landing{% endblock %}
@@ -46,16 +46,21 @@
     </div>
     <div class="row">
       <p class="large">
-        {{ _('We’re the leading open source cross-platform email and calendaring client, free for business and personal use. If you like the software, please consider a donation!') }}
+        {{ _('We’re the leading open source cross-platform email and calendaring client, free for business and personal use. If you like the software, <em>please consider a donation!</em>') }}
       </p>
       <p class="large">
         {{ _('By donating you’ll help ensure it stays that way and contribute towards future development. All money donated will go directly to funding Thunderbird maintenance and development.') }}
       </p>
       <p class="large">
-        {{ _('Donations is currently our primary funding mechanism, so your contribution is essential, but voluntary.') }}
+        {{ _('As donations is currently our primary funding mechanism, your contribution is essential, but voluntary.') }}
       </p>
       <p>
-        <a href="http://donate.mozilla.org/thunderbird/" class="button green">Make a Donation</a>
+        <a href="https://donate.mozilla.org/thunderbird/" class="button green">Make a Donation</a>
+      </p>
+    </div>
+    <div class="row">
+      <p>
+        {{ _('Looking to download Thunderbird in another language or for another platform? See <a href="%s">Systems & Languages</a>')|format('../all/') }}
       </p>
     </div>
   </div>
