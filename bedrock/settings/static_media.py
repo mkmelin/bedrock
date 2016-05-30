@@ -1619,6 +1619,7 @@ PIPELINE_JS = {
         'source_filenames': (
             'js/base/mozilla-pager.js',
             'js/firefox/firefox-language-search.js',
+            'js/thunderbird/all.js',
         ),
         'output_filename': 'js/thunderbird_all-bundle.js',
     },

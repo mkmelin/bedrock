@@ -25,6 +25,7 @@
 {% block page_css %}
   {# Share with Firefox #}
   {% stylesheet 'firefox_all' %}
+  {% stylesheet 'thunderbird-landing' %}
 {% endblock %}
 
 {% block content %}
@@ -47,9 +48,29 @@
         </div>
       </div> {#-- /builds --#}
     </section>
+    <section id="donate">
+      <h2>{{ _('Donate') }}</h2>
+      <p>
+        {{ _('We’re the leading open source cross-platform email and calendaring client, free for business and personal use. If you like the software, <em>please consider a donation!</em>') }}
+      </p>
+      <p>
+        {{ _('By donating you’ll help ensure it stays that way and contribute towards future development. All money donated will go directly to funding Thunderbird maintenance and development.') }}
+      </p>
+      <p>
+        {{ _('As donations is currently our primary funding mechanism, your contribution is essential, but voluntary.') }}
+      </p>
+      <p>
+        <a href="https://donate.mozilla.org/thunderbird/" class="button green">
+        {{ _('Make a Donation') }}</a>
+      </p>
+    </section>
   </main>
 {% endblock %}
 
+{% block site_footer %}
+  {% include 'thunderbird/includes/simple-footer.html' %}
+{% endblock %}
+
 {% block js %}
-  {% javascript 'thunderbird_all' %}
+  {% javascript 'thunderbird-all' %}
 {% endblock %}
