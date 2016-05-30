@@ -5,8 +5,8 @@
 {% extends "thunderbird/base-resp.html" %}
 
 {% block page_title_prefix %}{{_('Thunderbird')}} — {% endblock %}
-{% block page_title %}{{ _('Software made to make email easier.') }}{% endblock %}
-{% block page_desc %}{{ _('Thunderbird is a free email application that’s easy to set up and customize - and it’s loaded with great features!') }}{% endblock %}
+{% block page_title %}{{ _('Thanks for downloading Thunderbird.') }}{% endblock %}
+###{% block page_desc %}{{ _('') }}{% endblock %}
 
 {% block body_id %}thunderbird-landing{% endblock %}
 
@@ -16,23 +16,48 @@
 
 {% block page_css %}
   {% stylesheet 'thunderbird-landing' %}
+  {% stylesheet 'thunderbird-download' %}
 {% endblock %}
 
 {% block content %}
 
-<main role="main">
-  <div id="main-feature">
+<main role="main" id="stage">
+  <div id="main-feature" class="main-content">
     <div class="row">
       {{ high_res_img('thunderbird/landing/logo.png', {'alt': _('Thunderbird'), 'width': '120', 'height': '120'}) }}
       <h1 class="large">{{ self.page_title() }}</h1>
       <p class="large">{{ self.page_desc() }}</p>
+      <!--
       <div class="download-button-wrapper">
-        {{ download_thunderbird(force_direct=true, alt_copy=_('Free Download'), download_page='./download/') }}
+        {{ download_thunderbird(force_direct=true, alt_copy=_('Free Download')) }}
       </div>
+      -->
+      <div class="download-button-wrapper desktop" id="download-button-wrapper-desktop">
+        {{ download_thunderbird(force_direct=true, dom_id='primary-download-button') }}
+      </div>
+
+      <p class="help">
+        {# fallback_url is replaced by the platform download link via JS, but if
+           something fails the user should still get a link to a working download path. #}
+        {% trans id='direct-download-link', fallback_url=url('thunderbird.latest.all') %}
+          Your Thunderbird should begin downloading automatically. If not, <a id="{{ id }}" href="{{ fallback_url }}">click here</a>.
+        {% endtrans %}
+      </p>
     </div>
-  </div>
-  <div id="thunderbird-screenshot">
-    {{ platform_img('thunderbird/landing/screenshot.png', {'alt': _('Thunderbird screenshot'), 'high-res': True, 'l10n': True, 'platforms': ('windows', 'linux', 'mac')}) }}
+    <div class="row">
+      <p class="large">
+        {{ _('We’re the leading open source cross-platform email and calendaring client, free for business and personal use. If you like the software, please consider a donation!') }}
+      </p>
+      <p class="large">
+        {{ _('By donating you’ll help ensure it stays that way and contribute towards future development. All money donated will go directly to funding Thunderbird maintenance and development.') }}
+      </p>
+      <p class="large">
+        {{ _('Donations is currently our primary funding mechanism, so your contribution is essential, but voluntary.') }}
+      </p>
+      <p>
+        <a href="http://donate.mozilla.org/thunderbird/" class="button green">Make a Donation</a>
+      </p>
+    </div>
   </div>
 </main>
 
@@ -75,4 +100,8 @@
 
 {% block site_footer %}
   {% include 'thunderbird/includes/simple-footer.html' %}
+{% endblock %}
+
+{% block js %}
+  {% javascript 'thunderbird-download' %}
 {% endblock %}

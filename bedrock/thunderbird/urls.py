@@ -21,6 +21,7 @@ urlpatterns = (
     page('thunderbird/email-providers', 'thunderbird/email-providers.html'),
     page('thunderbird/organizations', 'thunderbird/organizations.html'),
     page('thunderbird/channel', 'thunderbird/channel.html'),
+    page('thunderbird/download', 'thunderbird/download.html'),
 
     # Start pages by channel
     page('thunderbird/release/start', 'thunderbird/start/release.html'),

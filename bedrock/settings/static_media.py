@@ -933,6 +933,12 @@ PIPELINE_CSS = {
         ),
         'output_filename': 'css/thunderbird-start-bundle.css',
     },
+    'thunderbird-download': {
+        'source_filenames': (
+            'css/thunderbird/download.less',
+        ),
+        'output_filename': 'css/thunderbird-download-bundle.css',
+    },
 }
 
 PIPELINE_JS = {
@@ -1615,6 +1621,12 @@ PIPELINE_JS = {
             'js/firefox/firefox-language-search.js',
         ),
         'output_filename': 'js/thunderbird_all-bundle.js',
+    },
+    'thunderbird-download': {
+        'source_filenames': (
+            'js/thunderbird/download.js',
+        ),
+        'output_filename': 'js/thunderbird-download-bundle.js',
     },
     'newsletter_form': {
         'source_filenames': (

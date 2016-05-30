@@ -14,7 +14,8 @@ from lib.l10n_utils import get_locale
 @jinja2.contextfunction
 def download_thunderbird(ctx, channel='release', dom_id=None,
                          locale=None, force_direct=False,
-                         alt_copy=None, button_color='green'):
+                         alt_copy=None, button_color='green',
+                         download_page=None):
     """ Output a "Download Thunderbird" button.
 
     :param ctx: context from calling template.
@@ -24,6 +25,7 @@ def download_thunderbird(ctx, channel='release', dom_id=None,
     :param force_direct: Force the download URL to be direct.
     :param alt_copy: Specifies alternate copy to use for download buttons.
     :param button_color: color of download button. Default to 'green'.
+    :param download_page: URL or download page
     :return: The button html.
     """
     alt_channel = '' if channel == 'release' else channel
@@ -41,29 +43,33 @@ def download_thunderbird(ctx, channel='release', dom_id=None,
     builds = []
 
     for plat_os, plat_os_pretty in thunderbird_desktop.platform_labels.iteritems():
-        # Fallback to en-US if this plat_os/version isn't available
-        # for the current locale
-        _locale = locale if plat_os_pretty in platforms else 'en-US'
-
-        # And generate all the info
-        download_link = thunderbird_desktop.get_download_url(
-            channel, version, plat_os, _locale,
-            force_direct=force_direct,
-        )
-
-        # If download_link_direct is False the data-direct-link attr
-        # will not be output, and the JS won't attempt the IE popup.
-        if force_direct:
-            # no need to run get_download_url again with the same args
-            download_link_direct = False
+        # If a download page is specified, the button should link to that.
+        if download_page:
+            download_link = download_page
+            download_link_direct = download_page
         else:
-            download_link_direct = thunderbird_desktop.get_download_url(
-                channel, version, plat_os, _locale,
-                force_direct=True,
-            )
-            if download_link_direct == download_link:
-                download_link_direct = False
+            # Fallback to en-US if this plat_os/version isn't available
+            # for the current locale
+            _locale = locale if plat_os_pretty in platforms else 'en-US'
 
+            # And generate all the info
+            download_link = thunderbird_desktop.get_download_url(
+                channel, version, plat_os, _locale,
+                force_direct=force_direct,
+            )
+
+            # If download_link_direct is False the data-direct-link attr
+            # will not be output, and the JS won't attempt the IE popup.
+            if force_direct:
+                # no need to run get_download_url again with the same args
+                download_link_direct = False
+            else:
+                download_link_direct = thunderbird_desktop.get_download_url(
+                    channel, version, plat_os, _locale,
+                    force_direct=True,
+                )
+                if download_link_direct == download_link:
+                    download_link_direct = False
         builds.append({'os': plat_os,
                        'os_pretty': plat_os_pretty,
                        'download_link': download_link,
